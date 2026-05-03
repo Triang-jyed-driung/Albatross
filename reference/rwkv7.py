@@ -208,7 +208,7 @@ class RWKV_x070(MyModule):
                 state[i*3+2] = torch.zeros(self.n_embd, dtype=DTYPE, requires_grad=False, device="cuda")
         else:
             state = [None for _ in range(self.n_layer * 3 + 1)]
-            state[self.n_layer*3] = torch.zeros((), dtype=torch.int32, requires_grad=False, device="cuda")
+            state[self.n_layer*3] = torch.zeros((bsz,), dtype=torch.int32, requires_grad=False, device="cuda")
             # state[self.n_layer*3+1] = 
             # state[self.n_layer*3+2] = torch.ops.rwkv7_state_fwd_fp16.setup_rand(42, bsz)
             for i in range(self.n_layer): # state: 0=att_x_prev 1=att_kv 2=ffn_x_prev
